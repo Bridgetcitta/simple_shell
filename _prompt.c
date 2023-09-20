@@ -13,7 +13,7 @@ void _prompt(void)
 
 
 
-_prompt.c
+_prompt.C
 #include "shell.h"
 #include <stdio.h>
 
