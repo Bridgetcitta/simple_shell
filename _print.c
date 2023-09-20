@@ -1,11 +1,9 @@
 #include "shell.h"
-
 /**
  * _print - prints function
  * @format: string input
  * Return: 0
  */
-
 void _print(const char *format, ...)
 {
 	int num, i;
@@ -13,7 +11,6 @@ void _print(const char *format, ...)
 	char num_str[12];
 	char *str;
 	va_list args;
-
 	va_start(args, format);
 
 	while (*format)
@@ -54,6 +51,5 @@ void _print(const char *format, ...)
 		}
 		format++;
 	}
-
 	va_end(args);
 }
