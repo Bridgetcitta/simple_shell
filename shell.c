@@ -1,36 +1,27 @@
 #include "shell.h"
+#include <unistd.h>
 
 #define MAX_INPUT_SIZE 256
 
 /**
  * main - entry point
  * @argc: command line argument
- * @argv: array string
+ * @argv: array of strings
  * Return: 0
  */
-
 int main(int argc, char *argv[])
 {
-	char *format = NULL;
-	size_t size = 0;
-	const char *newPath = "/path/to/my/directory";
+	char input[MAX_INPUT_SIZE];
+	const char *new_path = "/simple_shell/";
 
 	while (1)
 	{
 		_prompt();
-		format = malloc(sizeof(char) * MAX_INPUT_SIZE);
-		if (format == NULL)
-		{
-			perror("malloc");
-			exit(EXIT_FAILURE);
-		}
-		read_input(format, size);
-		_token(argc, argv);
-		_execute(format);
-		processArguments(argc, argv);
-		setPath(newPath);
-
-		free(format);
+		read_input(input, sizeof(input));
+		_tokenize_and_print_arguments(argc, argv);
+		_execute(input);
+		process_arguments(input);
+		set_path(new_path);
 	}
 
 	return (0);
