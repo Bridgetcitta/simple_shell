@@ -1,16 +1,74 @@
 #include "shell.h"
+
 /**
- * _print - prints function
- * @format: string input
- * Return: 0
+ * print_char - prints a character
+ * @c: character to print
+ */
+void print_char(char c)
+{
+	write(1, &c, 1);
+}
+
+/**
+ * print_str - prints a string
+ * @str: pointer to the string to print
+ */
+void print_str(const char *str)
+{
+	if (str != NULL)
+	{
+		while (*str)
+		{
+			print_char(*str);
+			str++;
+		}
+	}
+	else
+	{
+		print_str("(null)");
+	}
+}
+
+/**
+ * print_int - prints an integer
+ * @num: integer to print
+ */
+void print_int(int num)
+{
+	char int_str_buffer[12];
+	int len = 0;
+	int i;
+
+	if (num == 0)
+	{
+		int_str_buffer[len++] = '0';
+	}
+	else
+	{
+		while (num > 0)
+		{
+			int_str_buffer[len++] = '0' + (num % 10);
+			num /= 10;
+		}
+	}
+
+	for (i = len - 1; i >= 0; i--)
+	{
+		print_char(int_str_buffer[i]);
+	}
+}
+
+/**
+ * _print - custom printf-like function
+ * @format: format string
+ * @...: variable arguments
  */
 void _print(const char *format, ...)
 {
-	int num, i;
-	int len = 0;
-	char num_str[12];
-	char *str;
+	int num;
+	const char *str;
 	va_list args;
+
 	va_start(args, format);
 
 	while (*format)
@@ -21,35 +79,21 @@ void _print(const char *format, ...)
 			if (*format == 'd')
 			{
 				num = va_arg(args, int);
-				while (num > 0)
-				{
-					num_str[len++] = '0' + (num % 10);
-					num /= 10;
-				}
-				if (len == 0)
-				{
-					num_str[len++] = '0';
-				}
-				for (i = len - 1; i >= 0; i--)
-				{
-					write(1, &num_str[i], 1);
-				}
+				print_int(num);
 			}
 			else if (*format == 's')
 			{
-				str = va_arg(args, char *);
-				while (*str)
-				{
-					write(1, str, 1);
-					str++;
-				}
+				str = va_arg(args, const char *);
+				print_str(str);
 			}
 		}
 		else
 		{
-			write(1, format, 1);
+			print_char(*format);
 		}
 		format++;
 	}
+
 	va_end(args);
 }
+

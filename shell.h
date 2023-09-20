@@ -16,6 +16,10 @@ void _execute(const char *format);
 void processArguments(int argc, char *argv[]);
 void setPath(const char *newPath);
 void _token(int argc, char *argv[]);
+void _print(const char *format, ...);
+void print_char(char c);
+void print_str(const char *str);
+void print_int(int num);
 
 
 #endif
