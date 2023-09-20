@@ -38,18 +38,3 @@ void setPath(const char *newPath)
 		_print("%s\n", newPath);
 	}
 }
-/**
- * main - entry point
- * @argc: parameter member
- * @argv: array of string
- * Return: 0
- */
-int main(int argc, char *argv[])
-{
-	const char *newPath;
-
-	processArguments(argc, argv);
-	setPath(newpath);
-
-	return (0);
-}

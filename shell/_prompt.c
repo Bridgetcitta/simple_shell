@@ -9,16 +9,3 @@ void _prompt(void)
 {
 	_print("simple_shell$");
 }
-
-
-
-
-_prompt.c
-#include "shell.h"
-#include <stdio.h>
-
-void _prompt(void)
-{
-	_print("simple_shell$ ");
-}
-
