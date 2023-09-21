@@ -1,4 +1,21 @@
 #include "shell.h"
+#include <stdarg.h>
+#include <unistd.h>
+/**
+ * _print - custom printf-like function
+ * @format: format string
+ * @...: variable arguments
+ */
+void _print(const char *format, ...)
+{
+	va_list args;
+
+	va_start(args, format);
+
+	vfprintf(stdout, format, args);
+
+	va_end(args);
+}
 
 /**
  * print_char - prints a character
@@ -6,7 +23,7 @@
  */
 void print_char(char c)
 {
-	write(1, &c, 1);
+	write(STDOUT_FILENO, &c, 1);
 }
 
 /**
@@ -17,11 +34,7 @@ void print_str(const char *str)
 {
 	if (str != NULL)
 	{
-		while (*str)
-		{
-			print_char(*str);
-			str++;
-		}
+		write(STDOUT_FILENO, str, strlen(str));
 	}
 	else
 	{
@@ -33,102 +46,6 @@ void print_str(const char *str)
  * print_int - prints an integer
  * @num: integer to print
  */
-void print_int(int num)
-{
-	char int_str_buffer[12];
- 	int len = 0;
-	int i;
-
-	if (num == 0)
-	{
-		int_str_buffer[len++] = '0';
-	}
-	else
-	{
-		while (num > 0)
-		{
-			int_str_buffer[len++] = '0' + (num % 10);
-			num /= 10;
-		}
-	}
-
-	for (i = len - 1; i >= 0; i--)
-	{
-		print_char(int_str_buffer[i]);
-	}
-}
-
-/**
- * _print - custom printf-like function
- * @format: format string
- * @...: variable arguments
- */
-void _print(const char *format, ...)
-{
-	int num;
-	const char *str;
-	va_list args;
-
-	va_start(args, format);
-
-	while (*format)
-	{
-		if (*format == '%' && *(format + 1) != '\0')
-		{
-			format++;
-			if (*format == 'd')
-			{
-				num = va_arg(args, int);
-				print_int(num);
-			}
-			else if (*format == 's')
-			{
-				str = va_arg(args, const char *);
-				print_str(str);
-			}
-		}
-		else
-		{
-		print_char(*format);
-		}
-		format++;
-	}
-
-	va_end(args);
-}
-
-
-_print.c
-#include "shell.h"
-#include <stdarg.h>
-#include <unistd.h>
-
-void _print(const char *format, ...)
-{
-	va_list args;
-	va_start(args, format);
-
-	vfprintf(stdout, format, args);
-
-	va_end(args);
-}
-
-void print_char(char c)
-{
-	write(STDOUT_FILENO, &c, 1);
-}
-
-void print_str(const char *str)
-	if (str != NULL)
-	{
-		write(STDOUT_FILENO, str, strlen(str));
-	}
-	else
-	{
-		print_str("(null)");
-	}
-}
-
 void print_int(int num)
 {
 	char int_str_buffer[12];
