@@ -13,11 +13,19 @@
 #define MAX_INPUT_SIZE 256
 #define MAX_ARGUMENTS 128
 
+<<<<<<< HEAD
+=======
+<< << << < HEAD
+/* Structure to store aliases */
+struct Alias
+== == == =
+>>>>>>> f8c2f3cd3f53b0771381ff2ddfee5f76c63616a4
 /**
  * struct Alias - Structure to store aliases
  * @name: name
  * @value: value
  */
+<<<<<<< HEAD
 struct Alias
 {
 	char *name;
@@ -25,6 +33,20 @@ struct Alias
 };
 
 struct Alias aliases[MAX_ALIASES];
+=======
+typedef struct Alias
+>> >> >> > 0d70d98fd700baf2df62da0ec2808a4a74b3ced2
+{
+	char *name;
+	char *value;
+}
+/* Global array to store aliases */
+struct Alias aliases[MAX_ALIASES]
+<< << << < HEAD
+int aliasCount
+== == == =
+>> >> >> > 0d70d98fd700baf2df62da0ec2808a4a74b3ced2
+>>>>>>> f8c2f3cd3f53b0771381ff2ddfee5f76c63616a4
 void printAliases(void);
 int findAlias(char *name);
 int extractAlias(char *arg, char **name, char **value);
