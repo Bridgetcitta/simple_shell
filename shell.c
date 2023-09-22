@@ -1,28 +1,37 @@
 #include "shell.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
+#include <sys/wait.h>
 
 #define MAX_INPUT_SIZE 256
-
 /**
- * main - entry point
- * @argc: command line argument
- * @argv: array of strings
+ * execute_command - executes commands
+ * @command: parameter member
+ * @arguments: array pointer
  * Return: 0
  */
-int main(int argc, char *argv[])
+void execute_command(char *command, char *arguments[])
 {
-	char input[MAX_INPUT_SIZE];
-	const char *new_path = "/simple_shell/";
+	int status;
+	pid_t child_pid;
 
-	while (1)
+	child_pid = fork();
+	if (child_pid == -1)
 	{
-		_prompt();
-		read_input(input, sizeof(input));
-		_tokenize_and_print_arguments(argc, argv);
-		_execute(input);
-		process_arguments(input);
-		set_path(new_path);
+		perror("fork");
+		exit(EXIT_FAILURE);
 	}
 
-	return (0);
+	if (child_pid == 0)
+	{
+		execvp(command, arguments);
+		perror("execvp");
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		waitpid(child_pid, &status, 0);
+	}
 }
