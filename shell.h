@@ -37,20 +37,12 @@
 extern char **environ;
 
 
-<<<<<<< HEAD
-=======
-#define MAX_ALIASES 100
-#define MAX_INPUT_SIZE 256
-#define MAX_ARGUMENTS 128
-
->>>>>>> a0ee2063634b5dd5a46fbb7191837c94c7dacc27
 /**
  * struct liststr - singly linked list
  * @num: the number field
  * @str: a string
  * @next: points to the next node
  */
-<<<<<<< HEAD
 typedef struct liststr
 {
 	int num;
@@ -239,28 +231,5 @@ void check_chain(info_t *, char *, size_t *, size_t, size_t);
 int replace_alias(info_t *);
 int replace_vars(info_t *);
 int replace_string(char **, char *);
-=======
-struct Alias
-{
-	char *name;
-	char *value;
-};
-struct Alias aliases[MAX_ALIASES];
-void printAliases(void);
-int findAlias(char *name);
-int extractAlias(char *arg, char **name, char **value);
-void processAlias(char *args[]);
-void _print(const char *format, ...);
-void execute_command(char *arguments[]);
-int check_command_existence(char *command);
-ssize_t custom_getline(char **lineptr, size_t *n, FILE *stream);
-void shell_exit(int status);
-int shell_setenv(char *name, char *value, int overwrite);
-int shell_unsetenv(char *name);
-int _cd(const char *path);
-int process_cd(char *argv[]);
-int process_exit(int argc, char *argv[]);
-int custom_atoi(const char *str);
->>>>>>> a0ee2063634b5dd5a46fbb7191837c94c7dacc27
 
 #endif
