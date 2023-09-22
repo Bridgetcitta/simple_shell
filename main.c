@@ -39,7 +39,7 @@ int main(void)
 			if (arg != NULL)
 				arguments[arg_count++] = arg;
 			arguments[arg_count] = NULL;
-			execute_command(command, arguments);
+			execute_command(arguments);
 		}
 	}
 	free(input);
