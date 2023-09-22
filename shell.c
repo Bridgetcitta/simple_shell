@@ -8,13 +8,15 @@
 #define MAX_INPUT_SIZE 256
 /**
  * execute_command - executes commands
- * @command: parameter member
  * @arguments: array pointer
  * Return: 0
  */
-void execute_command(char *command, char *arguments[])
+void execute_command(char *arguments[])
 {
 	int status;
+	char *envp[] = {NULL};
+	char *full_path = "/usr/bin/hsh";
+
 	pid_t child_pid;
 
 	child_pid = fork();
@@ -26,8 +28,8 @@ void execute_command(char *command, char *arguments[])
 
 	if (child_pid == 0)
 	{
-		execvp(command, arguments);
-		perror("execvp");
+		execve(full_path, arguments, envp);
+		perror("execve");
 		exit(EXIT_FAILURE);
 	}
 	else
