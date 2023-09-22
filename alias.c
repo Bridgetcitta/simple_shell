@@ -23,6 +23,7 @@ void printAliases(void)
 int findAlias(char *name)
 {
 	int i;
+
 	for (i = 0; i < aliasCount; i++)
 	{
 		if (strcmp(name, aliases[i].name) == 0)
